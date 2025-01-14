@@ -1,0 +1,114 @@
+// MNT4-992, MNT6-992
+D := -95718723;
+IsFundamental(D);
+Factorization(D);
+Log(2, -D);
+h := ClassNumber(D);
+h;
+Factorization(h);
+QFs := QuadraticForms(D);
+CG, phi := ClassGroup(QFs);
+CG;
+id := phi(Identity(CG));
+f1 := phi(CG.1);
+f2 := phi(CG.2);
+h1 := 2;
+Order(f1) eq h1;
+h2 := h div h1;
+Order(f2) eq h2;
+printf"\n";
+
+L := [];
+for i := 1 to h1 do
+	for j := 1 to h2 do
+    	g := f1^i * f2^j;
+      	if (g[1] le 50) and IsPrime(g[1]) and not (g^(-1) in L) then  
+            Append(~L, g);
+        end if;
+	end for;
+end for;
+
+#L;
+for g in L do
+	g;
+	Factorization(g[1]);
+	Order(g);
+	printf"\n";
+end for;
+
+//////////////////
+
+f1 := QFs ! [3, 3, 7976561];
+f2 := QFs ! [41, 41, 583661];
+f3 := QFs ! [23, 3, 1040421];
+f4 := QFs ! [17, 7, 1407629];
+f5 := QFs ! [31, 15, 771927];
+f6 := QFs ! [13, 11, 1840747];
+f7 := QFs ! [19, 3, 1259457];
+
+Log(f6, f1); // -1
+Log(f6, f1*f2); // 392
+Log(f6, f1*f3); // 91
+Log(f6, f1*f4); // 486
+Log(f6, f5); // 130
+Log(f6, f7); // 333
+
+//( 1 -1 -1  1  0 -3  0)
+f1*f4*(f2*f3*f6^3)^(-1) eq id;
+dmin := id[3];
+dmin;
+// deg of the new endomorphism = 105660321;
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+// MNT-992
+r := 7;
+W := [3, 41, 23, 17, 31, 13, 19];
+M := DiagonalMatrix(W);
+B := Matrix(r, r, [
+    2, 0, 0, 0, 0, 0, 0, 
+    1, 1, 0, 0, 0, -392, 0,
+    1, 0, 1, 0, 0, -91, 0,
+    1, 0, 0, 1, 0, -486, 0, 
+    0, 0, 0, 0, 1, -130, 0, 
+    0, 0, 0, 0, 0, 784, 0, 
+    0, 0, 0, 0, 0, -333, 1
+]);
+Er := ScalarMatrix(r, 1);
+printf"\n";
+
+L := Lattice(B, M);
+L;
+Zr := Lattice(Er, M);
+h := 2*784;
+Index(Zr, L) eq h;
+printf"\n";
+
+ShortestVectors(L);
+Lam, SM := SuccessiveMinima(L);
+Lam;
+SM;
+for i := 1 to r do
+    ni := 0;
+    Ni := 0;
+    di := 1;
+    for j := 1 to r do
+       vij := AbsoluteValue(SM[i][j]);
+       ni := ni + W[j]*vij;
+       Ni := Ni + W[j]*vij^2;
+       di := di*W[j]^vij; 
+    end for;
+    SM[i]; ni; Ni; di;
+    printf"\n";
+end for;
+
+//( 1 -1 -1  1  0 -3  0)
+//123
+l := 992;
+lPr := Ceiling(l/2);
+8*lPr; // 3968
+Ceiling(7.5*123); // 923
