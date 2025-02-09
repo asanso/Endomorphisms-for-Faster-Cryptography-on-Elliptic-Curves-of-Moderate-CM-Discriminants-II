@@ -1,1 +1,1 @@
-# Endomorphisms-for-Faster-Cryptography-on-Elliptic-Curves-of-Moderate-CM-Discriminants-2
+# Endomorphisms-for-Faster-Cryptography-on-Elliptic-Curves-of-Moderate-CM-Discriminants-II
