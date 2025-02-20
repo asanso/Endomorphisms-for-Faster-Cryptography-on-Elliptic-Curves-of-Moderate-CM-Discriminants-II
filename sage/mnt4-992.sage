@@ -16,4 +16,16 @@ assert p+1-t == r*c
 (p-1) % (2**2 * 3 * 5**5 * 13) == 0
 (r-1) % (2**4 * 3**2 * 5**10) == 0
 Fp = GF(p)
-E4 = EllipticCurve([Fp(a),Fp(b)])
+E0 = EllipticCurve([Fp(a),Fp(b)])
+
+#t =E0.trace_of_frobenius()
+#disc = t^2 - 4*p
+#print(factor(disc))
+#print()
+#list of curves on the crater
+#FpX = Fp['X']
+#X = FpX.gen()
+#D = fundamental_discriminant(-D)
+#H = FpX(hilbert_class_polynomial(D))
+#print(H.roots())
+#print()
