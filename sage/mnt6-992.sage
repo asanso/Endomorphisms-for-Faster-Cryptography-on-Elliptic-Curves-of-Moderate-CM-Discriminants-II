@@ -1,3 +1,14 @@
+def multi_scalar_mul(P, k1, endo, k2):
+    return k1*P + k2*endo(P)
+
+def fast_scalar_mul(n,P):
+    beta = vector([n,0])*N_inv
+    b = vector([int(beta[0]), int(beta[1])]) * N
+    k1 = n-b[0]
+    k2 = -b[1]
+    return  multi_scalar_mul(P,k1, full_end, k2)
+
+
 # MNT6_992
 k = 6
 u = -0x642f8c925a0278b003be024b9cf438c83f203c80536acd5ec712fb1f57601dcfcba5fd496eae61c6584ffee6e9e8cd591dd6c71140985f6e87042ce193ba
@@ -49,3 +60,15 @@ Q = full_end(P)
 eigen = roots[1][0]
 
 assert Q == eigen*P
+
+# GLV
+
+M = Matrix([[int(-eigen),1], [int(r),0]])
+#print(M)
+N = M.LLL()
+N_inv = N**-1
+
+n = ZZ.random_element(r)
+S1 = n*P
+S2 = fast_scalar_mul(n,P)
+assert S1 == S2
