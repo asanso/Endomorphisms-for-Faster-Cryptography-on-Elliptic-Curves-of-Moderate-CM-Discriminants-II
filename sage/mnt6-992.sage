@@ -18,25 +18,18 @@ assert p+1-t == r*c
 Fp = GF(p)
 E0 = EllipticCurve([Fp(a),Fp(b)])
 
-# there is only one isogeny here
 phi0 =  E0.isogenies_prime_degree(3)[0]
 E1 = phi0.codomain()
-
 phi1 = E1.isogenies_prime_degree(13)[0]
 E2 = phi1.codomain()
-
 phi2 = E2.isogenies_prime_degree(13)[0]
 E3 = phi2.codomain()
-
 phi3 = E3.isogenies_prime_degree(13)[0]
 E4 = phi3.codomain()
-
-phi4 = E4.isogenies_prime_degree(17)[1]
+phi4 = E4.isogenies_prime_degree(17)[10]
 E5 = phi4.codomain()
-
 phi5 = E5.isogenies_prime_degree(23)[1]
 E6 = phi5.codomain()
-
-phi6 = E6.isogenies_prime_degree(41)[1]
-
+phi6 = E6.isogenies_prime_degree(41)[0]
 assert phi6.codomain().j_invariant() == E0.j_invariant()
+ 
