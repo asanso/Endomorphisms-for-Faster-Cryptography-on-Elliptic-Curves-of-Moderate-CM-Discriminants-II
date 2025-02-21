@@ -32,4 +32,20 @@ phi5 = E5.isogenies_prime_degree(23)[1]
 E6 = phi5.codomain()
 phi6 = E6.isogenies_prime_degree(41)[0]
 assert phi6.codomain().j_invariant() == E0.j_invariant()
- 
+
+# Computing eigenvalue 
+end =(phi6*phi5*phi4*phi3*phi2*phi1*phi0)
+iso =end.codomain().isomorphism_to(E0)
+full_end = (iso*end)
+trace = full_end.trace()
+
+norm = 3*13^3*17*23*41
+Fr = GF(r)
+R.<x> = PolynomialRing(Fr)
+poly = x^2 - trace*x + norm
+roots = poly.roots()
+P = E0.random_point()
+Q = full_end(P)
+eigen = roots[1][0]
+
+assert Q == eigen*P
