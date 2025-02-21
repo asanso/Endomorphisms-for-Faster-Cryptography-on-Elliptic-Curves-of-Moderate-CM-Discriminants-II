@@ -16,4 +16,4 @@ assert p+1-t == r*c
 (p-1) % (2^4 * 3^2 * 5^10) == 0
 (r-1) % (2^2 * 3 * 5^5 * 13) == 0
 Fp = GF(p)
-E6 = EllipticCurve([Fp(a),Fp(b)])
+E0 = EllipticCurve([Fp(a),Fp(b)])
