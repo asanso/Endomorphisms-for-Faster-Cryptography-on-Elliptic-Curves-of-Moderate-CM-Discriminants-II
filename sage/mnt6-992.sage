@@ -17,3 +17,7 @@ assert p+1-t == r*c
 (r-1) % (2^2 * 3 * 5^5 * 13) == 0
 Fp = GF(p)
 E0 = EllipticCurve([Fp(a),Fp(b)])
+
+# there is only one isogeny here
+phi0 =  E0.isogenies_prime_degree(3)[0]
+E1 = phi0.codomain()
