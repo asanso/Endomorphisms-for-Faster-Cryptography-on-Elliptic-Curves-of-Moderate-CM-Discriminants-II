@@ -56,7 +56,6 @@ def projective_maps_optimized(phi,Fp, neg):
 
     assert psi3^3 == (sX.denominator()/10314424798490535546171949056)
     psi2 = sX.numerator()/10314424798490535546171949056
-    psi2 = sX.numerator()
     psi1XZ = psi1(x=X/Z)
     psi2XZ = psi2(x=X/Z)
     psi3XZ = psi3(x=X/Z)
