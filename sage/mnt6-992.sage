@@ -172,7 +172,11 @@ a4,b4,c4 = projective_maps_optimized_simple(phi4,Fp, True, 24)
 a5,b5,c5 = projective_maps_optimized_simple(phi5,Fp, True, 33)
 a6,b6,c6 = projective_maps_optimized_simple(phi6,Fp, False, 60)
 
-#isoX = iso.rational_maps()[0]
-#isoY = iso.rational_maps()[1]
+isoX = iso.rational_maps()[0]
+isoY = iso.rational_maps()[1]
 
+x_end, y_end, z_end = end_composition_optimized(P)
+
+assert Q[0] == x_end/z_end
+assert Q[1] == y_end/z_end
 
