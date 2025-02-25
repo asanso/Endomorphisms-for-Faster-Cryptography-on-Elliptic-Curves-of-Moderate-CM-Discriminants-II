@@ -8,7 +8,7 @@ def fast_scalar_mul(n,P):
     k2 = -b[1]
     return  multi_scalar_mul(P,k1, full_end, k2)
 
-def projective_maps_optimized(phi,Fp, neg):
+def projective_maps_optimized_simple(phi,Fp, neg):
     rX,sXY = phi
     Fpx = Fp['x']
     x = Fpx.gen()
@@ -34,6 +34,35 @@ def projective_maps_optimized(phi,Fp, neg):
     a = psi1XZ*psi3XZ *Z^4
     b = psi2XZ *Z^3
     c = psi3XZ^3 *Z^3
+    return a,b,c
+
+def projective_maps_optimized(phi,Fp, neg):
+    rX,sXY = phi
+    Fpx = Fp['x']
+    x = Fpx.gen()
+    FpX = Fpx.fraction_field()
+    X = FpX.gen()
+    Fpxz = Fp['x', 'z']
+    FpXZ = FractionField(Fpxz)
+    X, Z = FpXZ.gens()
+    
+    psi1 = rX.numerator()
+    if neg:
+        psi3 = -rX.denominator().sqrt()
+    else:
+        psi3 = rX.denominator().sqrt()
+
+    sX = sXY(y=1)
+
+    assert psi3^3 == (sX.denominator()/10314424798490535546171949056)
+    psi2 = sX.numerator()
+    psi1XZ = psi1(x=X/Z)
+    psi2XZ = psi2(x=X/Z)
+    psi3XZ = psi3(x=X/Z)
+
+    a = psi1XZ*psi3XZ *Z^19
+    b = psi2XZ *Z^18
+    c = psi3XZ^3 *Z^18
     return a,b,c
 
 
@@ -100,3 +129,20 @@ n = ZZ.random_element(r)
 S1 = n*P
 S2 = fast_scalar_mul(n,P)
 assert S1 == S2
+
+a0,b0,c0 = projective_maps_optimized_simple(phi0,Fp, True)
+a1,b1,c1 = projective_maps_optimized(phi1,Fp, False)
+a2,b2,c2 = projective_maps_optimized(phi2,Fp, True)
+a3,b3,c3 = projective_maps_optimized(phi3,Fp, True)
+a4,b4,c4 = projective_maps_optimized(phi4,Fp, True)
+a5,b5,c5 = projective_maps_optimized(phi5,Fp, True)
+a6,b6,c6 = projective_maps_optimized(phi6,Fp, True)
+
+
+isoX = iso.rational_maps()[0]
+isoY = iso.rational_maps()[1]
+
+#x_end, y_end, z_end = end_composition_optimized(P)
+
+#assert Q[0] == x_end/z_end
+#assert Q[1] == y_end/z_end
