@@ -134,9 +134,9 @@ a0,b0,c0 = projective_maps_optimized_simple(phi0,Fp, True)
 a1,b1,c1 = projective_maps_optimized(phi1,Fp, False)
 a2,b2,c2 = projective_maps_optimized(phi2,Fp, True)
 a3,b3,c3 = projective_maps_optimized(phi3,Fp, True)
-a4,b4,c4 = projective_maps_optimized(phi4,Fp, True)
-a5,b5,c5 = projective_maps_optimized(phi5,Fp, True)
-a6,b6,c6 = projective_maps_optimized(phi6,Fp, True)
+a4,b4,c4 = projective_maps_optimized_simple(phi4,Fp, True)
+a5,b5,c5 = projective_maps_optimized_simple(phi5,Fp, True)
+a6,b6,c6 = projective_maps_optimized_simple(phi6,Fp, False)
 
 
 isoX = iso.rational_maps()[0]
