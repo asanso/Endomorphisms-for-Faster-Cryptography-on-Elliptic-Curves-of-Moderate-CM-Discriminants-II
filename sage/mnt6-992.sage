@@ -8,7 +8,7 @@ def fast_scalar_mul(n,P):
     k2 = -b[1]
     return  multi_scalar_mul(P,k1, full_end, k2)
 
-def projective_maps_optimized_simple(phi,Fp, neg):
+def projective_maps_optimized_simple(phi,Fp, neg,k):
     rX,sXY = phi
     Fpx = Fp['x']
     x = Fpx.gen()
@@ -31,9 +31,9 @@ def projective_maps_optimized_simple(phi,Fp, neg):
     psi2XZ = psi2(x=X/Z)
     psi3XZ = psi3(x=X/Z)
 
-    a = psi1XZ*psi3XZ *Z^4
-    b = psi2XZ *Z^3
-    c = psi3XZ^3 *Z^3
+    a = psi1XZ*psi3XZ *Z^(k+1)
+    b = psi2XZ *Z^k
+    c = psi3XZ^3 *Z^k
     return a,b,c
 
 def projective_maps_optimized(phi,Fp, neg):
@@ -164,13 +164,13 @@ S1 = n*P
 S2 = fast_scalar_mul(n,P)
 assert S1 == S2
 
-a0,b0,c0 = projective_maps_optimized_simple(phi0,Fp, True)
+a0,b0,c0 = projective_maps_optimized_simple(phi0,Fp, True, 3)
 a1,b1,c1 = projective_maps_optimized(phi1,Fp, False)
 a2,b2,c2 = projective_maps_optimized(phi2,Fp, True)
 a3,b3,c3 = projective_maps_optimized(phi3,Fp, True)
-a4,b4,c4 = projective_maps_optimized_simple(phi4,Fp, True)
-a5,b5,c5 = projective_maps_optimized_simple(phi5,Fp, True)
-a6,b6,c6 = projective_maps_optimized_simple(phi6,Fp, False)
+a4,b4,c4 = projective_maps_optimized_simple(phi4,Fp, True, 24)
+a5,b5,c5 = projective_maps_optimized_simple(phi5,Fp, True, 33)
+a6,b6,c6 = projective_maps_optimized_simple(phi6,Fp, False, 60)
 
 #isoX = iso.rational_maps()[0]
 #isoY = iso.rational_maps()[1]
