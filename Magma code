@@ -234,7 +234,7 @@ Log(f6, f1*f4) eq 486   and
 Log(f6, f5) eq 130   and
 Log(f6, f7) eq 333;
 
-assert f1*f2*f4*(f3*f6^3)^(-1) eq f0;
+assert f1*f2*f4 * (f3*f6^3)^(-1) eq f0;
 dmin := f0[3];
 fac := Factorization(dmin);
 fac;
@@ -323,12 +323,9 @@ Ceiling(7.5*l1ws);
 
 
 // lollipop-956-451 (Tables 1, 3, 4, 5)
-D := -120605958;
-assert D mod 9 eq 0;
-D := 4*(D div 9);
-assert D eq -53602648;
+D := -160807944;
 assert IsFundamental(D);
-assert Ceiling(Log(2, -D)) eq 26;
+assert Ceiling(Log(2, -D)) eq 28;
 QFs := QuadraticForms(D);
 Cl, iso := ClassGroup(QFs);
 Cl;
@@ -344,47 +341,59 @@ for p in Prs do
     end if;
 end for;
 
-assert #perm eq 8;
+assert #perm eq 10;
 f0 := iso(Identity(Cl));
-f1 := perm[1];
-f2 := perm[2];
-f3 := perm[4];
-f4 := perm[8];
-f5 := perm[5];
-f6 := perm[6];
-f7 := perm[7];
-f8 := perm[3];
+f1 := perm[1];    
+f2 := perm[2];   
+f3 := perm[5];   
+f4 := perm[6]; 
+f5 := perm[8];   
+f6 := perm[9];    
+f7 := perm[3];   
+f8 := perm[4]; 
+f9 := perm[7];   
+f10 := perm[10];
 
 assert
-f0 eq QFs ! [1, 0, 13400662]   and
-f1 eq QFs ! [2, 0, 6700331]   and
-f2 eq QFs ! [11, 0, 1218242]   and
-f3 eq QFs ! [19, 0, 705298]   and
-f4 eq QFs ! [47, 10, 285121]   and
-f5 eq QFs ! [23, 18, 582641]   and
-f6 eq QFs ! [29, 16, 462094]   and
-f7 eq QFs ! [31, 14, 432281]   and
-f8 eq QFs ! [17, 16, 788278]   and
+f0 eq QFs ! [1, 0, 40201986]   and
+f1 eq QFs ! [2, 0, 20100993]   and
+f2 eq QFs ! [3, 0, 13400662]   and
+f3 eq QFs ! [11, 0, 3654726]   and
+f4 eq QFs ! [19, 0, 2115894]   and 
+f5 eq QFs ! [41, 40, 980546]   and 
+f6 eq QFs ! [43, 4, 934930]   and 
+f7 eq QFs ! [5, 4, 8040398]   and
+f8 eq QFs ! [7, 2, 5743141]   and
+f9 eq QFs ! [23, 12, 1747914]   and 
+f10 eq QFs ! [47, 26, 855365]   and 
 
-Order(f1) eq 2   and
-Order(f2) eq 2   and
-Order(f3) eq 2   and
-Order(f4) eq 28   and
-Order(f5) eq 42   and
-Order(f6) eq 42   and
-Order(f7) eq 48   and
-Order(f8) eq 336   and
+Order(f1) eq 2   and   
+Order(f2) eq 2   and  
+Order(f3) eq 2   and   
+Order(f4) eq 2   and   
+Order(f5) eq 158   and   
+Order(f6) eq 158   and 
+Order(f7) eq 632   and   
+Order(f8) eq 632   and   
+Order(f9) eq 632   and   
+Order(f10) eq 632   and
+   
+Log(f7, f1) eq -1   and
+Log(f7, f2) eq -1   and
+Log(f7, f3) eq -1   and
+Log(f7, f1*f2) eq -1   and
+Log(f7, f1*f3) eq -1   and
+Log(f7, f2*f3) eq -1   and
+Log(f7, f1*f2*f3) eq -1   and
 
-Log(f8, f1) eq -1   and
-Log(f8, f2) eq -1   and
-Log(f8, f1*f2) eq -1   and
-Log(f8, f1*f3) eq 168   and
-Log(f8, f4) eq 276   and
-Log(f8, f5) eq 184   and
-Log(f8, f1*f6) eq 248   and 
-Log(f8, f1*f2*f7) eq 287; 
+Log(f7, f1*f2*f3*f4) eq 316   and
+Log(f7, f1*f5) eq 344   and
+Log(f7, f1*f2*f3*f6) eq 24   and
+Log(f7, f1*f2*f8) eq 179   and
+Log(f7, f9) eq 365   and
+Log(f7, f10) eq 517;
 
-assert f1*f6*f5^(-5) eq f0;
+assert f7^7*f8^2 * f9^(-1) eq f0;
 dmin := f0[3];
 fac := Factorization(dmin);
 fac;
@@ -406,29 +415,31 @@ sig;
 
 
 // lollipop-956-451 (Tables 4, 6)
-n := 8;
-w := [2, 11, 19, 47, 23, 29, 31, 17];
+n := 10;
+w := [2, 3, 11, 19, 41, 43, 5, 7, 23, 47];
 W := DiagonalMatrix(w);
 M := Matrix(n, n, [
-    2, 0, 0, 0, 0, 0, 0, 0,
-    0, 2, 0, 0, 0, 0, 0, 0,
-    1, 0, 1, 0, 0, 0, 0, -168,
-    0, 0, 0, 1, 0, 0, 0, -276,
-    0, 0, 0, 0, 1, 0, 0, -184,
-    1, 0, 0, 0, 0, 1, 0, -248,
-    1, 1, 0, 0, 0, 0, 1, -287,
-    0, 0, 0, 0, 0, 0, 0, 336
+    2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 2, 0, 0, 0, 0, 0, 0, 0, 0,     
+    0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 
+    1, 1, 1, 1, 0, 0, -316, 0, 0, 0, 
+    1, 0, 0, 0, 1, 0, -344, 0, 0, 0, 
+    1, 1, 1, 0, 0, 1, -24, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 632, 0, 0, 0, 
+    1, 1, 0, 0, 0, 0, -179, 1, 0, 0, 
+    0, 0, 0, 0, 0, 0, -365, 0, 1, 0, 
+    0, 0, 0, 0, 0, 0, -517, 0, 0, 1
 ]);
 In := ScalarMatrix(n, 1);
 
 L := Lattice(M, W);
 L;
 Zn := Lattice(In, W);
-h := 2*2*336;
+h := 2^3*632;
 assert Index(Zn, L) eq h;
 printf"\n";
 
-R := 2500;
+R := 1000;
 l1ws := 1000000;
 B := ShortVectorsProcess(L, R);
 while not IsEmpty(B) do
@@ -457,7 +468,7 @@ printf"\n";
 
 l := 451;
 lpr := Ceiling(l/2);
-sig := 32091;
+sig := 32094;
 8*lpr;
 Ceiling(7.5*sig); 
 Ceiling(7.5*l1ws);
