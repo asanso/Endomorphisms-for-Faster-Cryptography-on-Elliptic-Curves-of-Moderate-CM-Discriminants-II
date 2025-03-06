@@ -1,6 +1,7 @@
 import random
 from curve import WeierstrassCurve
 from  MNT6992 import MNT6992
+from  MNT4992 import MNT4992
 
 #mnt6-992
 
