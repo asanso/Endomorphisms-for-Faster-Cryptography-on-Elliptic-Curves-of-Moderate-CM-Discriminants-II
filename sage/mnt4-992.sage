@@ -38,6 +38,70 @@ def projective_maps_optimized_simple(phi,Fp, neg,k):
     return a,b,c
 
 
+def projective_maps_optimized(phi,Fp, neg):
+    rX,sXY = phi
+    Fpx = Fp['x']
+    x = Fpx.gen()
+    FpX = Fpx.fraction_field()
+    X = FpX.gen()
+    Fpxz = Fp['x', 'z']
+    FpXZ = FractionField(Fpxz)
+    X, Z = FpXZ.gens()
+    
+    psi1 = rX.numerator()
+    if neg:
+        psi3 = -rX.denominator().sqrt()
+    else:
+        psi3 = rX.denominator().sqrt()
+
+    sX = sXY(y=1)
+
+    assert psi3^3 == (sX.denominator()/10314424798490535546171949056)
+    psi2 = sX.numerator()/10314424798490535546171949056
+    psi1XZ = psi1(x=X/Z)
+    psi2XZ = psi2(x=X/Z)
+    psi3XZ = psi3(x=X/Z)
+
+    a = psi1XZ*psi3XZ *Z^19
+    b = psi2XZ *Z^18
+    c = psi3XZ^3 *Z^18
+    return a,b,c
+
+def end_composition_optimized(P):
+    x0 = P[0]
+    y0 = P[1]
+    z0 = 1 
+
+    #1st isogeny
+    x1 = a0(x0,z0)  
+    y1 = y0 *b0(x0,z0)
+    z1 = z0*c0(x0,z0)
+    #2nd isogeny
+    x2 = a1(x1,z1)  
+    y2 = y1 *b1(x1,z1)
+    z2 = z1*c1(x1,z1)
+    #3rd isogeny
+    x3 = a2(x2,z2)  
+    y3 = y2 *b2(x2,z2)
+    z3 = z2*c2(x2,z2)
+    #4th isogeny
+    x4 = a3(x3,z3)  
+    y4 = y3 *b3(x3,z3)
+    z4 = z3*c3(x3,z3)
+    #5th isogeny
+    x5 = a4(x4,z4)  
+    y5 = y4 *b4(x4,z4)
+    z5 = z4*c4(x4,z4)
+    #6th isogeny
+    x6 = a5(x5,z5)  
+    y6 = y5 *b5(x5,z5)
+    z6 = z5*c5(x5,z5)
+    #7th isogeny
+    x7 = a6(x6,z6)  
+    y7 = y6 *b6(x6,z6)
+    z7 = z6*c6(x6,z6)
+    return  isoX(x7, y7), isoY(x7,y7), z7
+
 # MNT4_992
 k = 4
 u = 0xc85f1924b404f160077c049739e871907e407900a6d59abd8e25f63eaec03b9f974bfa92dd5cc38cb09ffdcdd3d19ab23bad8e228130bedd0e0859c32774
@@ -103,6 +167,17 @@ S2 = fast_scalar_mul(n,P)
 assert S1 == S2
 
 a0,b0,c0 = projective_maps_optimized_simple(phi0,Fp, True, 3)
+a1,b1,c1 = projective_maps_optimized(phi1,Fp, False)
+a2,b2,c2 = projective_maps_optimized(phi2,Fp, True)
+a3,b3,c3 = projective_maps_optimized(phi3,Fp, False)
 a4,b4,c4 = projective_maps_optimized_simple(phi4,Fp, True, 24)
 a5,b5,c5 = projective_maps_optimized_simple(phi5,Fp, False, 33)
 a6,b6,c6 = projective_maps_optimized_simple(phi6,Fp, True, 60)
+
+isoX = iso.rational_maps()[0]
+isoY = iso.rational_maps()[1]
+
+x_end, y_end, z_end = end_composition_optimized(P)
+
+assert Q[0] == x_end/z_end
+assert Q[1] == y_end/z_end
