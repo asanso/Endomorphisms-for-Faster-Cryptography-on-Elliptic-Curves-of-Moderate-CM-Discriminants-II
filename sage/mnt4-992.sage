@@ -1,3 +1,13 @@
+def multi_scalar_mul(P, k1, endo, k2):
+    return k1*P + k2*endo(P)
+
+def fast_scalar_mul(n,P):
+    beta = vector([n,0])*N_inv
+    b = vector([int(beta[0]), int(beta[1])]) * N
+    k1 = n-b[0]
+    k2 = -b[1]
+    return  multi_scalar_mul(P,k1, full_end, k2)
+
 # MNT4_992
 k = 4
 u = 0xc85f1924b404f160077c049739e871907e407900a6d59abd8e25f63eaec03b9f974bfa92dd5cc38cb09ffdcdd3d19ab23bad8e228130bedd0e0859c32774
@@ -46,7 +56,7 @@ poly = x^2 - trace*x + norm
 roots = poly.roots()
 P = E0.random_point()
 Q = full_end(P)
-eigen = roots[1][0]
+eigen = roots[0][0]
 
 assert Q == eigen*P
 
