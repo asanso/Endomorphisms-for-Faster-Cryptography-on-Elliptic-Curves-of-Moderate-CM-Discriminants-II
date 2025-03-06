@@ -65,6 +65,57 @@ def projective_maps_optimized_simple(phi,Fp, neg,k):
     c = psi3XZ^3 *Z^k
     return a,b,c
 
+def end_composition_optimized(P):
+    x0 = P[0]
+    y0 = P[1]
+    z0 = 1 
+
+    #1st isogeny
+    x1 = a0(x0,z0)  
+    y1 = y0 *b0(x0,z0)
+    z1 = z0*c0(x0,z0)
+    #2nd isogeny
+    x2 = a1(x1,z1)  
+    y2 = y1 *b1(x1,z1)
+    z2 = z1*c1(x1,z1)
+    #3rd isogeny
+    x3 = a2(x2,z2)  
+    y3 = y2 *b2(x2,z2)
+    z3 = z2*c2(x2,z2)
+    #4th isogeny
+    x4 = a3(x3,z3)  
+    y4 = y3 *b3(x3,z3)
+    z4 = z3*c3(x3,z3)
+    #5th isogeny
+    x5 = a4(x4,z4)  
+    y5 = y4 *b4(x4,z4)
+    z5 = z4*c4(x4,z4)
+    #6th isogeny
+    x6 = a5(x5,z5)  
+    y6 = y5 *b5(x5,z5)
+    z6 = z5*c5(x5,z5)
+    #7th isogeny
+    x7 = a6(x6,z6)  
+    y7 = y6 *b6(x6,z6)
+    z7 = z6*c6(x6,z6)
+
+    #8th isogeny
+    x8 = a7(x7,z7)  
+    y8 = y7 *b7(x7,z7)
+    z8 = z7*c7(x7,z7)
+
+    #9th isogeny
+    x9 = a8(x8,z8)  
+    y9 = y8 *b8(x8,z8)
+    z9 = z8*c8(x8,z8)
+
+    #10th isogeny
+    x10 = a9(x9,z9)  
+    y10 = y9 *b9(x9,z9)
+    z10 = z9*c9(x9,z9)
+
+    return  isoX(x10, y10), isoY(x10,y10), z10
+
 
 x=589042076226215548287689476330582191609793749744861871604900539741454676076257591997245318667180479210398140701841229910422936321486475345296314; 
 p=x^2-x+1
@@ -135,4 +186,14 @@ a5,b5,c5 = projective_maps_optimized(phi5,Fp, False, 2176782336, 7)
 a6,b6,c6 = projective_maps_optimized(phi6,Fp, False, 2176782336, 7)
 a7,b7,c7 = projective_maps_optimized(phi7,Fp, True, 101559956668416, 10)
 a8,b8,c8 = projective_maps_optimized(phi8,Fp, True, 101559956668416, 10)
-q9,b9,c9 = projective_maps_optimized_simple(phi9,Fp, False, 33)
+a9,b9,c9 = projective_maps_optimized_simple(phi9,Fp, False, 33)
+
+
+isoX = iso.rational_maps()[0]
+isoY = iso.rational_maps()[1]
+
+x_end, y_end, z_end = end_composition_optimized(P)
+
+assert Q[0] == x_end/z_end
+assert Q[1] == y_end/z_end
+
