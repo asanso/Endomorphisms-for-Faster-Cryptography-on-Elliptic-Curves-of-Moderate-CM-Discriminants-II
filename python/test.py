@@ -99,3 +99,35 @@ b = 2790502554287363478357872016575723654782993079110444160760731759127781779756
 r = 4554474620279221025376588013428792331658085875800439965576470444142136125074436360422816311318800204172284882642774195680976231192452677
 eigen = 1338228162335440229158233933458297877654311818170011752647462023091210257786969948374341757427185085939177917420605544163794803852157834
 h = 76182347360104295691389198837779736649246768246453788622413701157110735036917351906437908803769129014598039561668077363397378012546375286033150471993610
+
+
+
+E = WeierstrassCurve(p, a, b, r, h)
+
+P = E.random_point()
+Q = E.random_point()
+
+# add
+R = P.add(Q)
+assert R.on_curve()
+assert R == Q.add(P)
+
+# double
+R = P.double()
+assert R.on_curve()
+assert R  == P.add(P)
+
+# scalar mul
+n = random.randint(0,r)
+R = P.scalar_mul(n)
+assert R.on_curve()
+P.scalar_mul(E.cofactor * E.r).is_zero()
+
+# clear cofactor
+assert P.clear_cofactor().scalar_mul(E.r).is_zero()
+
+# multi scalar mul
+for [k1,k2] in [[12,13], [-12,13], [12,-13], [-12,-13]]:
+    P1 = E.random_point()
+    P2 = E.random_point()
+    assert P1.scalar_mul(k1).add(P2.scalar_mul(k2)) == P1.multi_scalar_mul(k1,P2,k2)
