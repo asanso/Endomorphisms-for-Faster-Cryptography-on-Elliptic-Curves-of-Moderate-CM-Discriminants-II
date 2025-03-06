@@ -28,3 +28,20 @@ phi8 = E8.isogenies_prime_degree(7)[0]
 E9 = phi8.codomain()
 phi9 = E9.isogenies_prime_degree(23)[1]
 assert phi9.codomain().j_invariant() == E0.j_invariant()
+
+# Computing eigenvalue 
+end =(phi9*phi8*phi7*phi6*phi5*phi4*phi3*phi2*phi1*phi0)
+iso =end.codomain().isomorphism_to(E0)
+full_end = (iso*end)
+trace = full_end.trace()
+
+norm = 5^7*7^2*23
+Fr = GF(r)
+R.<x> = PolynomialRing(Fr)
+poly = x^2 - trace*x + norm
+roots = poly.roots()
+P = E0.random_point()
+Q = full_end(P)
+eigen = roots[0][0]
+
+assert Q == eigen*P
