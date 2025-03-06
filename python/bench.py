@@ -1,6 +1,7 @@
 import random
 from sage.misc.misc import cputime
 from  MNT6992 import MNT6992
+from  MNT4992 import MNT4992
 from util import *
 
 #mnt6-992
