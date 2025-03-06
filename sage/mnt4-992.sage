@@ -8,6 +8,36 @@ def fast_scalar_mul(n,P):
     k2 = -b[1]
     return  multi_scalar_mul(P,k1, full_end, k2)
 
+
+def projective_maps_optimized_simple(phi,Fp, neg,k):
+    rX,sXY = phi
+    Fpx = Fp['x']
+    x = Fpx.gen()
+    FpX = Fpx.fraction_field()
+    X = FpX.gen()
+    Fpxz = Fp['x', 'z']
+    FpXZ = FractionField(Fpxz)
+    X, Z = FpXZ.gens()
+    
+    psi1 = rX.numerator()
+    if neg:
+        psi3 = -rX.denominator().sqrt()
+    else:
+        psi3 = rX.denominator().sqrt()
+
+    sX = sXY(y=1)
+    assert psi3^3 == sX.denominator()
+    psi2 = sX.numerator()
+    psi1XZ = psi1(x=X/Z)
+    psi2XZ = psi2(x=X/Z)
+    psi3XZ = psi3(x=X/Z)
+
+    a = psi1XZ*psi3XZ *Z^(k+1)
+    b = psi2XZ *Z^k
+    c = psi3XZ^3 *Z^k
+    return a,b,c
+
+
 # MNT4_992
 k = 4
 u = 0xc85f1924b404f160077c049739e871907e407900a6d59abd8e25f63eaec03b9f974bfa92dd5cc38cb09ffdcdd3d19ab23bad8e228130bedd0e0859c32774
@@ -71,3 +101,5 @@ n = ZZ.random_element(r)
 S1 = n*P
 S2 = fast_scalar_mul(n,P)
 assert S1 == S2
+
+a0,b0,c0 = projective_maps_optimized_simple(phi0,Fp, True, 3)
