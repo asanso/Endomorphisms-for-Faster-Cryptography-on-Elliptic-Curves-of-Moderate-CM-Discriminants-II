@@ -40,8 +40,8 @@ Fr = GF(r)
 R.<x> = PolynomialRing(Fr)
 poly = x^2 - trace*x + norm
 roots = poly.roots()
-P = E0.random_point()
+P = h*E0.random_point()
 Q = full_end(P)
-eigen = roots[0][0]
+eigen = roots[1][0]
 
 assert Q == eigen*P
