@@ -24,11 +24,11 @@ phi1 = E1.isogenies_prime_degree(13)[0]
 E2 = phi1.codomain()
 phi2 = E2.isogenies_prime_degree(13)[0]
 E3 = phi2.codomain()
-phi3 = E3.isogenies_prime_degree(13)[0]
+phi3 = E3.isogenies_prime_degree(13)[1]
 E4 = phi3.codomain()
-phi4 = E4.isogenies_prime_degree(17)[10]
+phi4 = E4.isogenies_prime_degree(17)[7]
 E5 = phi4.codomain()
-phi5 = E5.isogenies_prime_degree(23)[1]
+phi5 = E5.isogenies_prime_degree(23)[0]
 E6 = phi5.codomain()
 phi6 = E6.isogenies_prime_degree(41)[0]
 assert phi6.codomain().j_invariant() == E0.j_invariant()
