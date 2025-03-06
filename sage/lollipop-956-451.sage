@@ -8,6 +8,23 @@ h=761823473601042956913891988377797366492467682464537886224137011571107350369173
 r=4554474620279221025376588013428792331658085875800439965576470444142136125074436360422816311318800204172284882642774195680976231192452677
 
 E0 = EllipticCurve(GF(p), [a,b])
-
-phi0 =  E0.isogenies_prime_degree(3)[0]
+phi0 =  E0.isogenies_prime_degree(5)[0]    
 E1 = phi0.codomain()
+phi1 = E1.isogenies_prime_degree(5)[0]
+E2 = phi1.codomain()
+phi2 = E2.isogenies_prime_degree(5)[1]
+E3 = phi2.codomain()
+phi3 = E3.isogenies_prime_degree(5)[0]
+E4 = phi3.codomain()
+phi4 = E4.isogenies_prime_degree(5)[1]
+E5 = phi4.codomain()
+phi5 = E5.isogenies_prime_degree(5)[0]
+E6 = phi5.codomain()        
+phi6 = E6.isogenies_prime_degree(5)[0]
+E7 = phi6.codomain()
+phi7 = E7.isogenies_prime_degree(7)[0]
+E8 = phi7.codomain()
+phi8 = E8.isogenies_prime_degree(7)[0]
+E9 = phi8.codomain()
+phi9 = E9.isogenies_prime_degree(23)[1]
+assert phi9.codomain().j_invariant() == E0.j_invariant()
