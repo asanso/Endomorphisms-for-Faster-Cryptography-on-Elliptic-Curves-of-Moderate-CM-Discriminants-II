@@ -88,7 +88,7 @@ class Lollipop956451Point(PointWeierstrass):
         def psi(self):
             x,y,z = self.X, self.Y, self.Z
 
-            for i in range(7):
+            for i in range(10):
                 new_x = self.curve.a_maps[i](x,z) 
                 y = y* self.curve.b_maps[i](x,z) 
                 z = z* self.curve.c_maps[i](x,z) 
