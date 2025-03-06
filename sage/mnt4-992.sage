@@ -103,3 +103,6 @@ S2 = fast_scalar_mul(n,P)
 assert S1 == S2
 
 a0,b0,c0 = projective_maps_optimized_simple(phi0,Fp, True, 3)
+a4,b4,c4 = projective_maps_optimized_simple(phi4,Fp, True, 24)
+a5,b5,c5 = projective_maps_optimized_simple(phi5,Fp, False, 33)
+a6,b6,c6 = projective_maps_optimized_simple(phi6,Fp, True, 60)
