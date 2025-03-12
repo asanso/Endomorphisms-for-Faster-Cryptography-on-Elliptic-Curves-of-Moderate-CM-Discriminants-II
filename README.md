@@ -1,5 +1,6 @@
 # Benchmark Results Overview
 
+This document presents benchmark results for scalar multiplication on three elliptic curves: MNT-992, Lollipop-956-451, The benchmarks compare the performance of the optimized GLV (Gallant–Lambert–Vanstone) method against the standard double-and-add scalar multiplication. For more details, refer to the paper and especially to its Section 3.
 
 ## Usage
 
