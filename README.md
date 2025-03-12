@@ -24,7 +24,7 @@ endomorphism ϕ:                   3.095ms (87% faster)
 standard scalar multiplication:   19.007ms
 GLV based on ϕ:                   14.392ms (32% faster)
 ================================================================================
-                                lollipop-956-451                                 
+                                    lollipop-956-451                                 
 ================================================================================
 scalar multiplication by 2^l':    2.593ms
 endomorphism ϕ:                   1.407ms (84% faster)
