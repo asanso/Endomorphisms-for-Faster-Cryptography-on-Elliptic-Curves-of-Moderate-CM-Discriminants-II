@@ -14,10 +14,22 @@ b = 1642739491069868239864206518917328724337439725254750097543357143990096951788
 r = 25641744522180213985074042382512419032582205964092241104233192501069961626908990804689046062985807367763157388208148142783024211337097607475328728764501059521991679940707134911388454490566722006414134338905237592345300668055898078034132669792309029396443022768100968479265087506725202295216329962501
 eigen = 8755393583322235624319443723664913402874200942755340958163213971984906486122241114422935779373476910592110677400288398529023760704760112304369251845295565360428092853190053203262375244370427985275769122677973709446606120471880416662042575031699787390164434036694557784674658579937262190468706225568
 
-
 E = MNT6992(p, a, b, r, 1, eigen)
 P = E.random_point()
 n = random.randint(0,r)
+l = 496
+
+t = cputime()
+for i in range(1000):
+    P.scalar_mul(2**l)
+t = cputime(t)
+print("scalar multiplication:\t\t\t{:5.3f}ms".format(t))
+
+t2 = cputime()
+for i in range(1000):
+    P.psi()
+t2 = cputime(t2)
+print('endomorphism:\t\t{:5.3f}ms ({:2.0f}% faster)'.format(t2, 100*(t-t2)/t2))
 
 print()
 t = cputime()
@@ -45,6 +57,19 @@ eigen = 171985690527512248046967430530886662177282034534237910311982032365274340
 E = MNT4992(p, a, b, r, 1, eigen)
 P = E.random_point()
 n = random.randint(0,r)
+l = 496
+
+t = cputime()
+for i in range(1000):
+    P.scalar_mul(2**l)
+t = cputime(t)
+print("scalar multiplication:\t\t\t{:5.3f}ms".format(t))
+
+t2 = cputime()
+for i in range(1000):
+    P.psi()
+t2 = cputime(t2)
+print('endomorphism:\t\t{:5.3f}ms ({:2.0f}% faster)'.format(t2, 100*(t-t2)/t2))
 
 print()
 t = cputime()
@@ -72,7 +97,19 @@ h = 7618234736010429569138919883777973664924676824645378862241370115711073503691
 E = Lollipop956451(p, a, b, r, h, eigen)
 P = E.random_point()
 n = random.randint(0,r)
+l = 226
 
+t = cputime()
+for i in range(1000):
+    P.scalar_mul(2**l)
+t = cputime(t)
+print("scalar multiplication:\t\t\t{:5.3f}ms".format(t))
+
+t2 = cputime()
+for i in range(1000):
+    P.psi()
+t2 = cputime(t2)
+print('endomorphism:\t\t{:5.3f}ms ({:2.0f}% faster)'.format(t2, 100*(t-t2)/t2))
 print()
 t = cputime()
 for i in range(1000):
