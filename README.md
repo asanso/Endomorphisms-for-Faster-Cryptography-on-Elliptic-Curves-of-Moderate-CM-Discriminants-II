@@ -6,6 +6,7 @@
 ```shell
 cd python
 sage -python bench.py 
+```
 
 **N.B.** The benchmarks are averaged over 1000 instances of the routine. Besides, the endomorphism $\phi$ is not evaluated via (the homogeneous version of) Horner's scheme as proposed in the paper, but more elementarily. Therefore, (GLV based on) $\phi$ is even faster when implemented more properly.
 
