@@ -9,27 +9,27 @@ sage -python bench.py
 ================================================================================
                                     MNT6-992                                    
 ================================================================================
-scalar multiplication:                  5.800ms
-endomorphism:           3.095ms (87% faster)
+scalar multiplication by 2^l':                   5.800ms
+endomorphismϕ:           3.095ms (87% faster)
 
-scalar multiplication:                  19.007ms
-GLV:            14.392ms (32% faster)
+standard scalar multiplication:                  19.007ms
+GLV based on ϕ:            14.392ms (32% faster)
 ================================================================================
                                     MNT4-992                                    
 ================================================================================
-scalar multiplication:                  5.758ms
-endomorphism:           3.110ms (85% faster)
+scalar multiplication by 2^l':                   5.758ms
+endomorphism ϕ:           3.110ms (85% faster)
 
-scalar multiplication:                  19.105ms
-GLV:            14.620ms (31% faster)
+standard scalar multiplication:                 19.105ms
+GLV based on ϕ:           14.620ms (31% faster)
 ================================================================================
                                 lollipop-956451                                 
 ================================================================================
-scalar multiplication:                  2.593ms
-endomorphism:           1.407ms (84% faster)
+scalar multiplication by 2^l':                  2.593ms
+endomorphism ϕ:           1.407ms (84% faster)
 
-scalar multiplication:                  8.782ms
-GLV:            6.384ms (38% faster)
+standard scalar multiplication:                 8.782ms
+GLV based on ϕ:            6.384ms (38% faster)
 ```
 
 **N.B.** The benchmarks are averaged over 1000 instances of the routine. Besides, the endomorphism $\phi$ is not evaluated via (the homogeneous version of) Horner's scheme as proposed in the paper, but more elementarily. Therefore, (GLV based on) $\phi$ is even faster when implemented more properly.
